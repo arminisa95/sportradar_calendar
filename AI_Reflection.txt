@@ -2,26 +2,32 @@ AI Reflection
 
 As I am relatively new to coding (Started in Feb 2025 at 42, passed the piscine, 
 but because of no AMS fundings - I live in Linz, Austria - I started a certified course 
-as a JAVA developer at "ibis acam - Linz" in June and will finish in February 2026), 
+as a JAVA developer at "ibis acam - Linz" in June and will finish in February 2026,
+moving to Vienna in February), 
 I want to be sincere:
 
 I used AI(ChatGPT, Gemini, VS Extensions) for almost all parts of my project in some ways. 
 Foremost as an assistance for coding, creative input, inspiration, 
 to skip repeating processes, to check my code, to debug, to test;
 but especially...to continue faster, when it would have taken me much more time without it. 
+My deepest impression of using AI in the past days is, that I am really looking forward to 
+sitting down again and continue to learn coding so far, to really be able to evaluate
+the answers given by AI.
 
-1.)
+
 I started my project with brainstorming about the database:
     -how many tables
     -names of the tables
+    -brainstorming on the whiteboard(img in the github-repo)
     -how to categorize them - database normalization/3rd normal form
-    -the sport_id as the primary key for most entities
+    -the sport_id as the primary key for most entities; underscore for FK's
+
     -asked ChatGPT if my ideas make sense in that context with proper prompts:
         e.g." Was passiert, wenn ein Fremdschlüssel auf einen nicht 
         existierenden Primärschlüssel verweist?
             Recherchiere:
             wie Datenbanken solche Fehler erkennen können und wie man 
-            sie durch sogenannte "Referentielle Integrität" verhindert.
+            sie durch sogenannte "Referentielle Integrität" verhindert...
             ";
     -started creating tables in sql.
     -writing first php lines.
@@ -29,6 +35,16 @@ I started my project with brainstorming about the database:
     later on I rechecked the sql with AI and let it fill up my lines to get
     a more professional outcome.
 
-2.)
+The next day I startet creating the php's, because it was my first time with php 
+I asked ChatGPT immediately for some inspiration and first results. 
+First, I finished the GETS and later on the POSTS/ rechecked and did the finesse with AI.
 
+When every php was finished and returned the right JSON data, I started creating the html.
+Here I used AI as much as possible. 
 
+My thought was: If I am using AI, then properly. Because my css vocabulary is very small,
+I decided to AI as much as possible, to get a professionally working website, with
+contemporary design and functionality. 
+
+So, to resume, I used AI alot/ at least 85% of my project. 
+It wouldn't have been possible without, because I am still a humble beginner.
