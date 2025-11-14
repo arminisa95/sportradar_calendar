@@ -1,0 +1,262 @@
+:root {
+    --bg: #0a0f2c;
+    --surface: #051466;
+    --surface-strong: #03126a;
+    --border: rgba(255, 255, 255, 0.08);
+    --ring: rgba(138, 180, 255, 0.35);
+    --text: #ffffff;
+}
+
+body {
+    color: var(--text);
+    padding-top: 20px;
+    background-color: var(--bg);
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -20% -10% -20% -10%;
+    z-index: -1;
+    pointer-events: none;
+    background: none;
+    animation: none;
+    filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { 
+    animation: none; 
+  }
+}
+
+@keyframes auroraAnim {
+  0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.7; }
+  50%  { transform: translate3d(-2%,2%,0) scale(1.02); opacity: 0.85; }
+  100% { transform: translate3d(2%,-2%,0) scale(1.03); opacity: 0.75; }
+}
+
+#addEventOffcanvas .form-container {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
+}
+
+html {
+    background-color: #0a0f2c;
+}
+
+html, body {
+    scrollbar-color: #2b3b80 #0a0f2c;
+    scrollbar-width: thin;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
+    background: #0a0f2c;
+}
+
+html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
+    background-color: #2b3b80;
+    border-radius: 8px;
+    border: 2px solid #0a0f2c;
+}
+
+.event-card {
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgb(156, 69, 69);
+}
+
+.navbar {
+    margin-bottom: 30px;
+    background-color: #04074994 !important;
+}
+
+.navbar-animate {
+    transform: translateY(-100%);
+    animation: navbarSlideIn 800ms ease-out forwards;
+    will-change: transform, opacity;
+}
+
+#toastContainer {
+    z-index: 1080;
+}
+
+@keyframes navbarSlideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar-animate {
+        animation: none;
+        transform: none;
+    }
+}
+
+.form-container {
+    font-family: sans-serif;
+    background-color: #051466;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 30px;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(2px);
+}
+
+.form-container .form-label {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.form-container .form-control,
+.form-container .form-select,
+.form-container textarea {
+    background-color: #0f1678;
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+}
+
+.form-container .form-control::placeholder,
+.form-container textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.form-container .form-control:focus,
+.form-container .form-select:focus,
+.form-container textarea:focus {
+    border-color: #8ab4ff;
+    box-shadow: 0 0 0 0.2rem rgba(138, 180, 255, 0.25);
+}
+
+.filters {
+    margin-bottom: 20px;
+}
+
+.brand-img {
+    max-height: 80px;
+    object-fit: cover;
+    width: 100%;
+}
+
+#addEventOffcanvas {
+    background-color: #03126a;
+    border-left: 0;
+    --bs-offcanvas-bg: #03126a;
+    --bs-offcanvas-border-color: transparent;
+    box-shadow: none;
+    overflow-x: hidden;
+    scrollbar-color: #2b3b80 #0a0f2c;
+    scrollbar-width: thin;
+}
+
+#addEventOffcanvas::-webkit-scrollbar {
+    width: 10px;
+}
+
+#addEventOffcanvas::-webkit-scrollbar-track {
+    background: #03126a;
+}
+
+#addEventOffcanvas::-webkit-scrollbar-thumb {
+    background-color: #2b3b80;
+    border-radius: 8px;
+    border: 2px solid #0a0f2c;
+}
+
+#addEventOffcanvas .offcanvas-body {
+    background-color: #03126a;
+    color: #ffffff;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#addEventOffcanvas .offcanvas-header {
+    background-color: #03126a;
+    color: #ffffff;
+}
+
+.offcanvas-backdrop.show {
+    background-color: rgba(10, 15, 44, 0.85);
+}
+
+@media (min-width: 992px) {
+  #addEventOffcanvas {
+    --bs-offcanvas-width: 1000px;
+  }
+}
+
+#addEventOffcanvas .btn-close {
+    filter: invert(1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #2a66ff, #5a8dff);
+    border: 0;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.05);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.form-container input[type="date"]::-webkit-calendar-picker-indicator,
+.form-container input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.2) opacity(0.9);
+}
+
+.form-container input[type="date"],
+.form-container input[type="time"] {
+    color-scheme: white;
+}
+
+.toast {
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.toast .toast-body {
+    font-weight: 500;
+}
+
+.modal-content {
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.modal-content .modal-body, .modal-content .modal-title, .modal-content p {
+    color: #000 !important;
+}

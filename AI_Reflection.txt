@@ -1,0 +1,34 @@
+AI Reflection
+
+As I am relatively new to coding (Started in Feb 2025 at 42, passed the piscine, 
+but because of no AMS fundings - I live in Linz, Austria - I started a certified course 
+as a JAVA developer at "ibis acam - Linz" in June and will finish in February 2026), 
+I want to be sincere:
+
+I used AI(ChatGPT, Gemini, VS Extensions) for almost all parts of my project in some ways. 
+Foremost as an assistance for coding, creative input, inspiration, 
+to skip repeating processes, to check my code, to debug, to test;
+but especially...to continue faster, when it would have taken me much more time without it. 
+
+1.)
+I started my project with brainstorming about the database:
+    -how many tables
+    -names of the tables
+    -how to categorize them - database normalization/3rd normal form
+    -the sport_id as the primary key for most entities
+    -asked ChatGPT if my ideas make sense in that context with proper prompts:
+        e.g." Was passiert, wenn ein Fremdschlüssel auf einen nicht 
+        existierenden Primärschlüssel verweist?
+            Recherchiere:
+            wie Datenbanken solche Fehler erkennen können und wie man 
+            sie durch sogenannte "Referentielle Integrität" verhindert.
+            ";
+    -started creating tables in sql.
+    -writing first php lines.
+
+    later on I rechecked the sql with AI and let it fill up my lines to get
+    a more professional outcome.
+
+2.)
+
+
