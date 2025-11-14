@@ -118,7 +118,7 @@ function displayEvents(events) {
     return `
       <div class="col-md-6 col-lg-4">
         <div class="card event-card">
-          <div class="card-header bg-${getSportColor(event.sport_name)}">
+          <div class="card-header event-header ${getSportClass(event.sport_name)}">
             <h5 class="card-title text-white mb-0">${event.sport_name}</h5>
           </div>
           <div class="card-body">
@@ -129,8 +129,8 @@ function displayEvents(events) {
             </p>
             ${event.description ? `<p class="card-text">${event.description}</p>` : ''}
             <div class="d-flex justify-content-between mt-3">
-              <button class="btn btn-sm btn-outline-primary edit-event" data-event-id="${event.event_id}">Edit</button>
-              <button class="btn btn-sm btn-outline-danger delete-event" data-event-id="${event.event_id}">Delete</button>
+              <button class="btn__primary --gray btn-sm edit-event" data-event-id="${event.event_id}">Edit</button>
+              <button class="btn__primary --red btn-sm delete-event" data-event-id="${event.event_id}">Delete</button>
             </div>
           </div>
         </div>
@@ -161,6 +161,9 @@ function displayEvents(events) {
         editingEventId = Number(ev.event_id);
         eventForm.querySelector('button[type="submit"]').textContent = 'Save Changes';
 
+        // Apply background according to loaded event sport before showing
+        applyOffcanvasSportBg();
+
         const offcanvasEl = document.getElementById('addEventOffcanvas');
         const off = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
         off.show();
@@ -180,9 +183,53 @@ function displayEvents(events) {
   });
 }
 
-function getSportColor(name) {
-  const colors = { 'Football': 'success', 'Ice Hockey': 'primary', 'Basketball': 'warning', 'Tennis': 'danger', 'Golf': 'info' };
-  return colors[name] || 'secondary';
+
+function getSportClass(name) {
+  switch (name) {
+    case 'Football': return 'event-header-football';
+    case 'Ice Hockey': return 'event-header-icehockey';
+    case 'Basketball': return 'event-header-basketball';
+    case 'Tennis': return 'event-header-tennis';
+    default: return 'event-header-generic';
+  }
+}
+
+function getOffcanvasSportClassByName(name) {
+  switch (name) {
+    case 'Football': return 'form-sport-football';
+    case 'Ice Hockey': return 'form-sport-icehockey';
+    case 'Basketball': return 'form-sport-basketball';
+    case 'Tennis': return 'form-sport-tennis';
+    default: return '';
+  }
+}
+
+function applyOffcanvasSportBg() {
+  const formContainer = document.querySelector('#addEventOffcanvas .form-container');
+  if (!formContainer) return;
+  // Determine selected sport name from sportSelect using sports list
+  const sid = sportSelect && sportSelect.value ? String(sportSelect.value) : '';
+  const sportObj = sid ? sports.find(s => String(s.sport_id) === sid) : null;
+  const sportName = sportObj ? sportObj.sport_name : '';
+  const cls = getOffcanvasSportClassByName(sportName);
+
+  // Clear previous sport classes first
+  clearOffcanvasSportBg();
+
+  if (cls) {
+    formContainer.classList.add('has-sport-bg');
+    formContainer.classList.add(cls);
+  }
+}
+
+function clearOffcanvasSportBg() {
+  const formContainer = document.querySelector('#addEventOffcanvas .form-container');
+  if (!formContainer) return;
+  formContainer.classList.remove('has-sport-bg');
+  // Remove any class that starts with 'form-sport-'
+  const toRemove = [];
+  formContainer.classList.forEach(c => { if (c.indexOf('form-sport-') === 0) toRemove.push(c); });
+  toRemove.forEach(c => formContainer.classList.remove(c));
 }
 
 function setupEventListeners() {
@@ -194,6 +241,7 @@ function setupEventListeners() {
     homeTeamSelect.value = '';
     awayTeamSelect.value = '';
     venueSelect.value = '';
+    applyOffcanvasSportBg();
   });
 
   eventForm.addEventListener('submit', (e) => {
@@ -219,10 +267,15 @@ function setupEventListeners() {
   awayTeamSelect.addEventListener('change', enforceDifferentTeams);
 
   const offcanvasEl = document.getElementById('addEventOffcanvas');
+  // When opening, apply current selection background
+  offcanvasEl.addEventListener('show.bs.offcanvas', () => {
+    applyOffcanvasSportBg();
+  });
   offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
     editingEventId = null;
     eventForm.reset();
     eventForm.querySelector('button[type="submit"]').textContent = 'Add Event';
+    clearOffcanvasSportBg();
   });
 }
 

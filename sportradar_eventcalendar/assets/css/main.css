@@ -32,11 +32,7 @@ body::before {
   }
 }
 
-@keyframes auroraAnim {
-  0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.7; }
-  50%  { transform: translate3d(-2%,2%,0) scale(1.02); opacity: 0.85; }
-  100% { transform: translate3d(2%,-2%,0) scale(1.03); opacity: 0.75; }
-}
+/* removed unused keyframes auroraAnim */
 
 #addEventOffcanvas .form-container {
     max-width: none;
@@ -78,6 +74,53 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
 .event-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgb(156, 69, 69);
+}
+
+/* Event header with sport background image */
+.event-header {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+
+.event-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.event-header h5 {
+    position: relative;
+    z-index: 1;
+}
+
+/* Sport-specific images (slightly dimmed by overlay) */
+.event-header-football {
+    background-image: url('https://www.affiversemedia.com/wp-content/uploads/2021/05/sportradar.jpeg');
+    background-position: center calc(50%);
+}
+
+.event-header-icehockey {
+    background-image: url('https://blob.iihf.com/iihf-media/iihfmvc/media/contentimages/1_global/ott/ott_website-banner_04.jpg');
+}
+
+.event-header-basketball {
+    background-image: url('https://th.bing.com/th/id/OIP.opBkJWvWgmtUHLeWdBNB2QHaEK?w=324&h=182&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1');
+    background-position: center calc(50% + 30px);
+}
+
+.event-header-tennis {
+    background-image: url('https://massgestickt.de/wp-content/uploads/2021/06/iStock-666919620.jpg');
+    background-position: center calc(50% + 30px);
+}
+
+.event-header-generic {
+    background-image: linear-gradient(135deg, #2a66ff, #5a8dff);
 }
 
 .navbar {
@@ -128,17 +171,50 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
     backdrop-filter: blur(2px);
 }
 
+.form-container.has-sport-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    position: relative;
+}
+
+.form-container.has-sport-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.45));
+    border-radius: 5px;
+}
+
+.form-container.form-sport-football { background-image: url('https://www.affiversemedia.com/wp-content/uploads/2021/05/sportradar.jpeg'); background-position: center calc(50%); }
+.form-container.form-sport-icehockey { background-image: url('https://blob.iihf.com/iihf-media/iihfmvc/media/contentimages/1_global/ott/ott_website-banner_04.jpg'); }
+.form-container.form-sport-basketball { background-image: url('https://th.bing.com/th/id/OIP.opBkJWvWgmtUHLeWdBNB2QHaEK?w=324&h=182&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1'); background-position: center calc(50% + 30px); }
+.form-container.form-sport-tennis { background-image: url('https://massgestickt.de/wp-content/uploads/2021/06/iStock-666919620.jpg'); background-position: center calc(50% + 30px); }
+
 .form-container .form-label {
     color: #ffffff;
     font-weight: 600;
 }
 
+.form-container form {
+    position: relative;
+    z-index: 1; /* above overlay */
+    background: rgba(10, 16, 60, 0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
 .form-container .form-control,
 .form-container .form-select,
 .form-container textarea {
-    background-color: #0f1678;
+    background-color: rgba(18, 26, 92, 0.85);
     border-color: rgba(255, 255, 255, 0.25);
     color: #ffffff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
 .form-container .form-control::placeholder,
@@ -150,7 +226,15 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
 .form-container .form-select:focus,
 .form-container textarea:focus {
     border-color: #8ab4ff;
-    box-shadow: 0 0 0 0.2rem rgba(138, 180, 255, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(138, 180, 255, 0.35);
+}
+
+.form-container .row > [class*="col-"] {
+    margin-bottom: 10px;
+}
+
+.form-container button[type="submit"] {
+    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
 }
 
 .filters {
@@ -162,6 +246,50 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
     object-fit: cover;
     width: 100%;
 }
+
+/* Sticky site footer */
+.site-footer {
+    position: static;
+    background: rgba(4, 7, 73, 0.95);
+    color: #ffffff;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    min-height: 64px;
+}
+
+.site-footer .footer-title {
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    font-size: .85rem;
+    color: #cfd8ff;
+    margin-bottom: .5rem;
+}
+
+.site-footer p,
+.site-footer li,
+.site-footer a,
+.site-footer span {
+    color: #e9ecff;
+    font-size: .95rem;
+}
+
+.site-footer a.link-light {
+    color: #d6dcff !important;
+    text-decoration: none;
+}
+
+.site-footer a.link-light:hover {
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+.site-footer .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.site-footer .footer-list li + li { margin-top: .25rem; }
 
 #addEventOffcanvas {
     background-color: #03126a;
@@ -214,25 +342,6 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
     filter: invert(1);
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, #2a66ff, #5a8dff);
-    border: 0;
-}
-
-.btn-primary:hover {
-    filter: brightness(1.05);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #fff;
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-
 .form-container input[type="date"]::-webkit-calendar-picker-indicator,
 .form-container input[type="time"]::-webkit-calendar-picker-indicator {
     filter: invert(1) brightness(1.2) opacity(0.9);
@@ -259,4 +368,60 @@ html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
 
 .modal-content .modal-body, .modal-content .modal-title, .modal-content p {
     color: #000 !important;
+}
+
+/* Custom primary button with arrow (matches provided example) */
+.btn__primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    border: none;
+    text-decoration: none;
+    transition: filter 0.2s ease, background-color 0.2s ease;
+}
+
+.btn__primary::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: url('https://cdn-ilbncnn.nitrocdn.com/DPmYvNpoKujWQybCKacXenezezvtijDX/assets/images/optimized/rev-62d4782/sportradar.com/wp-content/themes/sportradar/assets/images/svg/arrow_right_white.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.btn__primary.--red {
+    background: #8e0d14;
+    color: #fff;
+}
+
+.btn__primary.--red:hover {
+    background: #6f0a10;
+    filter: brightness(1.03);
+}
+
+.btn__primary.--blue {
+    background: #2a66ff;
+    color: #fff;
+}
+
+.btn__primary.--blue:hover {
+    background: #1f54d6;
+}
+
+.btn__primary.--gray {
+    background: #6c757d;
+    color: #fff;
+}
+
+.btn__primary.--gray:hover {
+    background: #5a6270;
+}
+
+.btn__primary.btn-sm {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.9rem;
 }
